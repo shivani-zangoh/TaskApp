@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView, TouchableOpacity, Alert, Animated } from 'react-native';
 import axios from 'axios';
 import { Card } from '@rneui/themed';
 
 const StoredBook = ({ navigation, route }) => {
     const [storedBooks, setStoredBooks] = useState([]);
     const { addedItems } = route.params;
+    const translateAnim = useRef(new Animated.Value(0)).current; // Initialize animated value
 
     console.log("Stored Screen", route.params.addedItems)
+
+    useEffect(() => {
+        animateTranslation(); // Trigger animation on mount
+    }, []);
 
     useEffect(() => {
         if (addedItems && addedItems.length > 0) {
@@ -34,6 +39,23 @@ const StoredBook = ({ navigation, route }) => {
         Alert.alert('Book Removed Successfully');
     }
 
+    const animateTranslation = () => {
+        translateAnim.setValue(0); // Reset translation value
+         Animated.loop(
+            Animated.timing(translateAnim, {
+                toValue: 1,
+                duration: 2000, // Duration of the animation
+                useNativeDriver: true,
+            })
+         ).start();
+    };
+
+    const translation = translateAnim.interpolate({
+        inputRange: [0, 1],
+      //  outputRange: [300, 0], // Start position, End position
+          outputRange: [0, 120], // Start position, End position
+    });
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -46,6 +68,7 @@ const StoredBook = ({ navigation, route }) => {
                 </TouchableOpacity>
                 {storedBooks.map((item, index) => (
                     <View key={index}>
+                         <Animated.View key={index} style={{ transform: [{ translateX: translation }] }}> 
                         <Card containerStyle={styles.card}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 0 }}>
                                 <Image
@@ -67,6 +90,7 @@ const StoredBook = ({ navigation, route }) => {
                                 </View>
                             </View>
                         </Card>
+                        </Animated.View>
                     </View>
                 ))}
             </ScrollView>

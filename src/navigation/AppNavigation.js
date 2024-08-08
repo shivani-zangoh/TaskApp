@@ -12,14 +12,23 @@ import HomeScreen from '../screens/HomeScreen';
 import AllTask from '../Component/Array/AllTask';
 import BookList from '../screens/BookStore App/BookList';
 import StoredBook from '../screens/BookStore App/StoredBook';
+import WebviewScreen from '../screens/WebviewScreen';
+import AnimationScrollView from '../screens/AnimationScrollView'
+import Splash from '../screens/SplashScreen';
+import Welcome from '../screens/FoodReceipe App/Welcome';
+import Food from '../screens/FoodReceipe App/Food';
+import ReceipeDetail from '../screens/FoodReceipe App/ReceipeDetail';
+import Categories from '../Component/Categories';
+import Recipes from '../Component/Recipes';
+import Loading from '../Component/Loading';
 
 const Stack = createNativeStackNavigator();
-
 
 const AppNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="BookList">
+            <Stack.Navigator initialRouteName="Welcome">
+            {/* <Stack.Navigator initialRouteName="SplashScreen"> */}
                 <Stack.Screen
                     name="Dashboard"
                     component={Dashboard}
@@ -61,20 +70,65 @@ const AppNavigation = () => {
                     component={HomeScreen}
                     options={{ headerShown: false, }}
                 />
-               
+
                 <Stack.Screen
                     name="BookList"
                     component={BookList}
                     options={{ headerShown: false, }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                     name="StoredBook"
                     component={StoredBook}
                     options={{ headerShown: false, }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                     name="AllTask"
                     component={AllTask}
+                    options={{ headerShown: false, }}
+                />
+                <Stack.Screen
+                    name="WebviewScreen"
+                    component={WebviewScreen}
+                    options={{ headerShown: false, }}
+                />
+                <Stack.Screen
+                    name="AnimationScrollView"
+                    component={AnimationScrollView}
+                    options={{ headerShown: false, }}
+                />
+                <Stack.Screen
+                    name="SplashScreen" // this screen used for animation, of booklist screen
+                    component={Splash}
+                    options={{ headerShown: false, }}
+                />
+               <Stack.Screen
+                    name="Welcome"
+                    component={Welcome}
+                    options={{ headerShown: false, }}
+                />
+                  <Stack.Screen
+                    name="Food"
+                    component={Food}
+                    options={{ headerShown: false, }}
+                />
+                   <Stack.Screen
+                    name="Categories"
+                    component={Categories}
+                    options={{ headerShown: false, }}
+                />
+                    <Stack.Screen
+                    name="Recipes"
+                    component={Recipes}
+                    options={{ headerShown: false, }}
+                />
+                  <Stack.Screen
+                    name="Loading"
+                    component={Loading}
+                    options={{ headerShown: false, }}
+                />
+                 <Stack.Screen
+                    name="ReceipeDetail"
+                    component={ReceipeDetail}
                     options={{ headerShown: false, }}
                 />
             </Stack.Navigator>
