@@ -22,11 +22,13 @@ import Categories from '../Component/Categories';
 import Recipes from '../Component/Recipes';
 import Loading from '../Component/Loading';
 
+
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
     return (
         <NavigationContainer>
+            {/* <Stack.Navigator initialRouteName="BookList"> */}
             <Stack.Navigator initialRouteName="Welcome">
             {/* <Stack.Navigator initialRouteName="SplashScreen"> */}
                 <Stack.Screen
@@ -131,6 +133,7 @@ const AppNavigation = () => {
                     component={ReceipeDetail}
                     options={{ headerShown: false, }}
                 />
+                  
             </Stack.Navigator>
         </NavigationContainer>
     );

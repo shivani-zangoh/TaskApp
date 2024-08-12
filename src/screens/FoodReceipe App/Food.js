@@ -11,10 +11,61 @@ import { SparklesIconOutline } from "react-native-heroicons/outline";
 import axios from 'axios';
 //import { BellIcon} from "react-native-heroicons/outline";
 
+const CardSkeleton = () => {
+    return (
+        <View
+            // style={styles.containers}
+            style={[tw`bg-black/5`, {
+                width: '90%', height: hp(25),
+                borderRadius: 13,
+                padding: 26,
+                marginBottom: 16,
+                marginLeft: 20,
+                marginTop: 20
+            }]}
+        >
+            {/* Placeholder card content */}
+            <View style={styles.placeholder} />
+            <View style={styles.placeholder} />
+            <View style={styles.placeholder} />
+        </View>
+    );
+};
+
+const Card = () => {
+    return (
+        <View style={styles.card}>
+            <Text style={styles.heading}>
+                Welcome To Geeksforgeeks!!
+            </Text>
+            <Text style={styles.paragraph}>
+                A Computer Science portal for geeks.
+                It contains well written, well thought
+                and well explained computer science
+                and programming articles.
+            </Text>
+        </View>
+    );
+};
+
 const Food = () => {
     const [activeCategory, setActiveCategory] = useState('Beef');
     const [data, setData] = useState([]);
     const [meals, setMeals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulating an asynchronous data fetch 
+        setTimeout(() => {
+
+            // Set isLoading to false after 
+            // the data is fetched 
+            setIsLoading(false);
+
+            // Adjust the timeout value 
+            // according to your needs 
+        }, 2000);
+    }, []);
 
     useEffect(() => {
         getCategory();
@@ -78,7 +129,7 @@ const Food = () => {
                     />
                     <BellIcon width={hp(4)} height={hp(4)} color="gray" style={{ marginLeft: 260 }} />
                 </View>
-                <View style={tw`mx-4 space-y-2 mb-2 mt-5`}>
+                <View style={tw`mx-4 mb-2 mt-5`}>
                     <Text style={[tw`text-neutral-600 mb-5`, { fontSize: hp(1.7) }]}>Hello, Jhon !</Text>
                     <View>
                         <Text style={[tw`font-semibold text-neutral-600`, { fontSize: hp(3.8) }]}>Make your own food,</Text>
@@ -101,9 +152,23 @@ const Food = () => {
                 <View style={tw`mt-5 mx-4`}>
                     {data.length > 0 && <Categories data={data} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} />}
                 </View>
-                <View style={tw`mt-5 mx-4`}>
+                {isLoading ? (
+
+                    // Render the skeleton loading effect 
+                    //while isLoading is true 
+                    <CardSkeleton />
+                ) : (
+
+                    // Render the actual card component 
+                    //once isLoading is false 
+                    <View style={tw`mt-5 mx-4`}>
+                        <Recipes meals={meals} data={data} />
+                    </View>
+                )}
+
+                {/* <View style={tw`mt-5 mx-4`}>
                     <Recipes meals={meals} data={data} />
-                </View>
+                </View> */}
 
             </ScrollView>
         </View>
@@ -114,6 +179,44 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    containers: {
+        backgroundColor: '#F6F6F6',
+        borderRadius: 13,
+        padding: 46,
+        marginBottom: 16,
+        marginTop: 50,
+    },
+    placeholder: {
+        backgroundColor: '#ccc',
+        height: 16,
+        width: '100%',
+        marginTop: 10,
+        borderRadius: 4,
+        marginBottom: 8,
+    },
+    card: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
+        padding: 16,
+        marginHorizontal: 16,
+        marginBottom: 16,
+        marginTop: 50,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    heading: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginBottom: 8,
+        color: "green",
+    },
+    paragraph: {
+        fontSize: 15,
+        color: '#555555',
     },
 });
 

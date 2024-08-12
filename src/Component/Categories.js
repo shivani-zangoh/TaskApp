@@ -20,10 +20,9 @@ const Categories = ({ data, activeCategory, handleChangeCategory }) => {
                         let isActive = cat.strCategory === activeCategory;
                         let activeButtonClass = isActive ? tw`bg-amber-400` : tw`bg-black/10`;
                         return (
-                            <View style={{ marginLeft: -60 }}>
+                            <View key={index} style={{ marginLeft: -60 }}>
                                 <TouchableOpacity
-                                    key={index}
-                                    style={[tw`items-center mt-5 mr-5 space-y-1 pt-5`]}
+                                  style={[tw`items-center mt-5 mr-5 pt-5`]}
                                     onPress={() => handleChangeCategory(cat.strCategory)}
                                 >
                                     <View style={[tw`rounded-full p-[6px]`, { marginRight: 50 }, activeButtonClass]}>

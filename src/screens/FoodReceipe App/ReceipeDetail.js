@@ -18,14 +18,14 @@ const ReceipeDetail = (props) => {
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
 
-    useEffect(() => {
+     useEffect(() => {
         getMealData(item.idMeal);
     }, []);
 
     const getMealData = async (id) => {
         try {
             const response = await axios.get(`https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-            console.log('GET MEAL DATA ----', response.data.meals)
+            //console.log('GET MEAL DATA ----', response.data.meals)
             if (response && response.data) {
                 setMeal(response.data.meals[0])
                 setLoading(false);
@@ -64,16 +64,18 @@ const ReceipeDetail = (props) => {
         >
             <StatusBar barStyle="light-content" />
             <View style={tw`flex-row justify-center`}>
-                <Image
-                    source={{ uri: item.strMealThumb }}
-                    sharedTransitionTag={item.strMealThumb}
-                    style={[{
-                        width: wp(98), height: hp(50),
-                        borderRadius: 53, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, marginTop: 4
-                    }]}
-                />
+                <TouchableOpacity>
+                   <Image
+                        source={{ uri: item.strMealThumb }}
+                        sharedTransitionTag={item.strMealThumb}
+                        style={[{
+                            width: wp(98), height: hp(50),
+                            borderRadius: 53, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, marginTop: 4
+                        }]}
+                    />
+                </TouchableOpacity>
             </View>
-            <Animated.View entering={FadeIn.delay(200).duration(1000)}
+             <Animated.View entering={FadeIn.delay(200).duration(1000)}
                 style={tw`w-full absolute flex-row justify-between items-center pt-14`}>
                 <TouchableOpacity style={tw`p-2 rounded-full ml-5 bg-white`} onPress={() => navigation.goBack()}>
                     <ChevronLeftIcon strokeWidth={4.5} size={hp(3.5)} color="#fbbf24" />
@@ -180,16 +182,19 @@ const ReceipeDetail = (props) => {
                     </View>
                 )
             }
+
         </ScrollView>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+// });
+
+
 
 export default ReceipeDetail;
