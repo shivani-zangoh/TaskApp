@@ -1,27 +1,41 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet ,Button, AppState} from 'react-native';
-import { AppsState } from '../../App';
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import { Inter } from "./fonts";
 
-const Buttons = () => {
-    const context = useContext(AppsState);
-    const { loading, onSubmit} = context
-
-    return (
-        <View>
-            {/* <Text>Button</Text> */}
-           <Text>{loading ? ' Button is Loading': 'Submit the button'}</Text> 
-           <Button title='SUBMIT' onPress={onSubmit} disabled={loading}/>
-        </View>
-    );
-};
+const Button = ({ title, onPress, style, textSize ,textStyle,disabled,numberOfLines}) => {
+  return (
+   <View style={{ alignItems: 'center',justifyContent:'center'}}>
+     <TouchableOpacity onPress={onPress} style={[styles.button, style]} disabled={disabled}>
+      <Text numberOfLines={numberOfLines} style={[styles.text,textStyle, { fontSize: 12.8 }]}> {title}</Text>
+      {/* <Inter numberOfLines={numberOfLines}  name={title} style={[styles.text,textStyle]}/> */}
+    </TouchableOpacity>
+   </View>
+  );
+}
+export default Button;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'pink',
-    },
+  text: {
+    color: 'white',
+    textAlign:'center',
+    fontWeight:'500',
+  },
+  button: {
+    backgroundColor: '#D2464B',
+    padding: 14,
+    marginVertical:10,
+    borderRadius: 8,
+    width:'60%'
+  }
 });
 
-export default Buttons;
+{/* <Button title="ગુજરાતી" onPress={() => console.log('ગુજરાતી')}
+style={styles.button}
+textStyle={{
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: 400,
+    color: 'black',
+    lineHeight: 20,
+
+}} /> */}

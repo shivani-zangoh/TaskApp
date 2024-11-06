@@ -21,6 +21,7 @@ import ReceipeDetail from '../screens/FoodReceipe App/ReceipeDetail';
 import Categories from '../Component/Categories';
 import Recipes from '../Component/Recipes';
 import Loading from '../Component/Loading';
+import ChatScreen from '../screens/ChatScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,7 +30,7 @@ const AppNavigation = () => {
     return (
         <NavigationContainer>
             {/* <Stack.Navigator initialRouteName="BookList"> */}
-            <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Navigator initialRouteName="ChatScreen">
             {/* <Stack.Navigator initialRouteName="SplashScreen"> */}
                 <Stack.Screen
                     name="Dashboard"
@@ -131,6 +132,11 @@ const AppNavigation = () => {
                  <Stack.Screen
                     name="ReceipeDetail"
                     component={ReceipeDetail}
+                    options={{ headerShown: false, }}
+                />
+                  <Stack.Screen
+                    name="ChatScreen"
+                    component={ChatScreen}
                     options={{ headerShown: false, }}
                 />
                   
